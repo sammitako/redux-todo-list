@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const TodoItem = ({ todo, opnToggle }) => {
+const TodoItem = ({ todo, onToggle }) => {
   return (
     <li
       style={{ textDecoration: todo.done ? "line-through" : "none" }}
-      onClick={() => ontoggle(todo.id)}
+      onClick={() => onToggle(todo.id)}
     >
       {todo.text}
     </li>
