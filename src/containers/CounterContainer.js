@@ -1,6 +1,6 @@
 import React from "react";
 import Counter from "../components/Counter";
-import { useSelector, useDispatch } from "react-redux"; // 상태 조회, dispatch
+import { useSelector, useDispatch, shallowEqual } from "react-redux"; // 상태 조회, dispatch
 import { decrease, increase, setDiff } from "../moduels/counrer";
 
 const CounterContainer = () => {
@@ -15,14 +15,23 @@ const CounterContainer = () => {
   // const diff = useSelector((state) => state.counter.diff);
 
   // useSelector 최적화 (2) - equalityFn: 이전 상태와 다음 상태를 비교하는 함수
+  // const { number, diff } = useSelector(
+  //   (state) => ({
+  //     number: state.counter.number,
+  //     diff: state.counter.diff,
+  //   }),
+  //   (left, right) => {
+  //     return left.diff === right.diff && left.number === right.number;
+  //   }
+  // );
+
+  // useSelector 최적화 (3) - shallowEqual 함수 사용
   const { number, diff } = useSelector(
     (state) => ({
       number: state.counter.number,
       diff: state.counter.diff,
     }),
-    (left, right) => {
-      return left.diff === right.diff && left.number === right.number;
-    }
+    shallowEqual
   );
 
   const dispatch = useDispatch();
